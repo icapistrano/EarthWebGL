@@ -9,6 +9,9 @@
     "moduleResolution": "node",
     "types": [
       "three"
+    ],
+    "typeRoots": [
+      "./typings"
     ]
   },
   "include": ["src/js/*", "src/assets/*"],

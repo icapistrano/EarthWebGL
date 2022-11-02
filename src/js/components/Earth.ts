@@ -1,12 +1,14 @@
 import {
   SphereGeometry,
-  MeshLambertMaterial,
   Mesh,
   TextureLoader,
   Scene,
+  ShaderMaterial
 } from 'three';
 
 import earthTexture from './../../assets/earthTexture.jpg';
+import earthVertex from '../../shaders/earthVertex.glsl';
+import earthFragment from '../../shaders/earthFragment.glsl';
 
 export default class Earth {
   private earthRad: number;
@@ -21,8 +23,14 @@ export default class Earth {
 
   private initEarth(): Mesh {
     const geo = new SphereGeometry(this.earthRad, 60, 60);
-    const mat = new MeshLambertMaterial({
-      map: new TextureLoader().load(earthTexture),
+    const mat = new ShaderMaterial({
+      vertexShader: earthVertex,
+      fragmentShader: earthFragment,
+      uniforms: {
+        globeTexture: {
+          value: new TextureLoader().load(earthTexture)
+        }
+      }
     })
 
     return new Mesh(geo, mat);

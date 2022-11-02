@@ -14,6 +14,8 @@ export default class SceneManager {
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
 
     this.scene = this.initScene();
 
@@ -40,7 +42,7 @@ export default class SceneManager {
 
   private initRenderer(): WebGLRenderer {
     const renderer = new WebGLRenderer({ canvas: this.canvas, antialias: true })
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(this.canvas.width, this.canvas.height);
     renderer.setPixelRatio(window.devicePixelRatio);
     return renderer;
   }
